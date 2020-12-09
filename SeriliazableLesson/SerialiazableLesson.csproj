@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBF3CF98-2FEF-40E3-9FD3-38A0222C0F98}</ProjectGuid>
+    <ProjectGuid>{904FE4EE-A2AA-43F4-9C8B-41EE69757D9D}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>StringLessons</RootNamespace>
-    <AssemblyName>StringLessons</AssemblyName>
+    <RootNamespace>SeriliazableLesson</RootNamespace>
+    <AssemblyName>SeriliazableLesson</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,9 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Poem.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Group.cs" />
+    <Compile Include="Runner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Student.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

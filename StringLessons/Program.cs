@@ -10,18 +10,47 @@ namespace StringLessons
     {
         static void Main(string[] args)
         {
-            //RefStringVsStringbuilder();
-
-            //TimeCreateStringVsStringBuilder();
-
-            //OperationWithStringBuilder();
-
-            //AddStringBuilder();
-            //AddString();
-
-            //ArrayForSBAndNoStringBuilder(100);
-
+            PrintArray(StringSplitToArray("1 2 3 4 5 6 7 8 9"));
+            PrintArray(StringSplitToArrayWithConverterALL("1 2 3 4 5 6 7 8 9"));
+            StringVsStrinBuilder();
+            AddString();
+            AddStringBuilder();
+            RefStringVsStringbuilder();
+            TimeCreateStringVsStringBuilder();
+            OperationWithStringBuilder();
+            ArrayForSBAndNoStringBuilder(100000);
             RunEqulsStrinBuilder();
+        }
+        private static double[] StringSplitToArrayWithConverterALL(string line)
+        {
+            return Array.ConvertAll(line.Split(), new Converter<string, double>(StringToDouble));
+        }
+
+        private static double[] StringSplitToArray(string line)
+        {
+            string[] strArray = line.Split();
+            double[] array = new double[strArray.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = double.Parse(strArray[i]);
+            }
+            Console.WriteLine(array.GetType());
+            return array;
+
+        }
+
+        private static double StringToDouble(string input)
+        {
+            return double.Parse(input);
+        }
+
+        static void PrintArray(double[] array)
+        {
+            foreach (var item in array)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
         }
 
         private static void RunEqulsStrinBuilder()
@@ -53,22 +82,22 @@ namespace StringLessons
             DateTime start = DateTime.Now;
             int[] array = new int[count];
             Random random = new Random();
-            Console.Write("{");
-            
 
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = random.Next(1, 10);
-                if (i != array.Length - 1)
-                    Console.Write(array[i]+", ");
-                else
-                    Console.Write(array[i]);
-            }
-            Console.Write("}");
+            string s = ", ";
+            Console.WriteLine("{" + string.Join(", ", array) + "}");
+            //s+="{";
+            //for (int i = 0; i < array.Length - 1; i++)
+            //{
+            //    array[i] = random.Next(1, 10);
+            //    s+=(array[i] + ", ");
+            //}
+            //s += array[array.Length - 1];
+            //s+="}";
+
             DateTime end = DateTime.Now;
-            Console.WriteLine(end-start);
+            Console.WriteLine(end - start);
 
-            
+
         }
 
         private static void ExampleStringBuilder(int count)
@@ -76,9 +105,8 @@ namespace StringLessons
             DateTime start = DateTime.Now;
             int[] array = new int[count];
             Random random = new Random();
-            //Console.Write("{");
             StringBuilder stringBuilder = new StringBuilder("{");
-            
+
             for (int i = 0; i < array.Length; i++)
             {
                 array[i] = random.Next(1, 10);
@@ -98,17 +126,15 @@ namespace StringLessons
         {
             StringBuilder stringBuilder = new StringBuilder("Привет, StrigBuilder!");
             StringBuilder stringBuilder2 = new StringBuilder(30);
-            GetLengthAndCapacity(stringBuilder, stringBuilder2);
+            //GetLengthAndCapacity(stringBuilder, stringBuilder2);
             InsertRemoveReplaceAppendFormat(stringBuilder);
             Console.WriteLine(stringBuilder);
-
-
         }
 
         private static void InsertRemoveReplaceAppendFormat(StringBuilder stringBuilder)
         {
             stringBuilder.Append("!!!");
-            stringBuilder.Insert(7, "класс"); // вставка на 7 интекс слово класс
+            stringBuilder.Insert(7, "класс"); // вставка на 7 индекс слово класс
 
             //заменяем слово
             stringBuilder.Replace("Привет", "Приветствую тебя");
@@ -117,7 +143,7 @@ namespace StringLessons
             stringBuilder.Remove(17, 5);
 
             int i = 10;
-            stringBuilder.AppendFormat("переменная i = {0}", i);
+            stringBuilder.AppendFormat($"переменная i = {i}");
             stringBuilder.Append($"переменная i = {i}");
         }
 
@@ -126,15 +152,16 @@ namespace StringLessons
             Console.WriteLine($"Длина stringBuilder: {stringBuilder.Length}");
             Console.WriteLine($"Емкость stringBuilder: {stringBuilder.Capacity}");
             Console.WriteLine("---------------------");
-            //stringBuilder2.Append("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            stringBuilder2.Append("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             Console.WriteLine($"Длина stringBuilder2: {stringBuilder2.Length}");
             Console.WriteLine($"Емкость stringBuilder2: {stringBuilder2.Capacity}");
         }
 
         private static void TimeCreateStringVsStringBuilder()
         {
-            Console.WriteLine($"Время создания String {TimeCreateBigString(1000)}");
-            Console.WriteLine($"Время создания StringBuiled {TimeCreateBigStringBuilder(1000)}");
+            Console.WriteLine($"Время создания StringBuiled {TimeCreateBigStringBuilder(100000)}");
+            Console.WriteLine($"Время создания String {TimeCreateBigString(100000)}");
+
         }
 
         private static void RefStringVsStringbuilder()
@@ -201,7 +228,7 @@ namespace StringLessons
             return end - start;
         }
 
-        private static void HZ()
+        private static void StringVsStrinBuilder()
         {
             string s1 = "Hello";
             string s2 = "Hello";
@@ -210,7 +237,6 @@ namespace StringLessons
             StringBuilder sb = new StringBuilder(s1);
             StringBuilder sb2 = new StringBuilder(s1);
 
-            Console.WriteLine(sb.Equals(sb2) ? "true" : "false");
         }
     }
 }

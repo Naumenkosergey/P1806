@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBF3CF98-2FEF-40E3-9FD3-38A0222C0F98}</ProjectGuid>
+    <ProjectGuid>{1CCB4E49-7D43-4333-93C6-0EAC711A49A4}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>StringLessons</RootNamespace>
-    <AssemblyName>StringLessons</AssemblyName>
+    <RootNamespace>StructEnumProject</RootNamespace>
+    <AssemblyName>StructEnumProject</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Poem.cs" />
+    <Compile Include="Autoservice.cs" />
+    <Compile Include="Brend.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkStruct.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBF3CF98-2FEF-40E3-9FD3-38A0222C0F98}</ProjectGuid>
+    <ProjectGuid>{D4D2B39E-7784-4DB2-BF40-4568B19B0E77}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>StringLessons</RootNamespace>
-    <AssemblyName>StringLessons</AssemblyName>
+    <RootNamespace>InterfaceLessonn</RootNamespace>
+    <AssemblyName>InterfaceLessonn</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Poem.cs" />
+    <Compile Include="Dog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
