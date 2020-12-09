@@ -30,7 +30,7 @@ namespace SerializableTest
             Console.ReadKey();
 
             //Simple Object Acses Protocol не работает со списком (LIST)
-            ///////////////BEGIN SOAP/////////////////////
+            ///////////////BEGIN SOAP//////////////////////
             var soap = new SoapFormatter();
             SoapSerializable(soap, "group.soap", groups);
             Console.WriteLine("-----------------soap-----------------------");
