@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SerializableTest
 {
-    [Serializable]
+    [DataContract]
     internal class Student
     {
         int age;
-        public string Name { get; }
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
         public int Age
         {
             get { return age; }
@@ -24,7 +27,7 @@ namespace SerializableTest
                     age = value;
             }
         }
-
+        [DataMember]
         public Group Group { get; set; }
 
         public Student(string name, int age)

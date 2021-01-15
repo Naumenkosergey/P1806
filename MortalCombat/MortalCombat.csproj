@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{904FE4EE-A2AA-43F4-9C8B-41EE69757D9D}</ProjectGuid>
+    <ProjectGuid>{D2C25DE6-3000-40E9-BBE6-87C49913874F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SeriliazableLesson</RootNamespace>
-    <AssemblyName>SeriliazableLesson</AssemblyName>
+    <RootNamespace>MortalCombat</RootNamespace>
+    <AssemblyName>MortalCombat</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,8 +35,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,14 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Group.cs" />
-    <Compile Include="Runner.cs" />
+    <Compile Include="ResultBatle.cs" />
+    <Compile Include="FirstHerro.cs" />
+    <Compile Include="HerroTemplate.cs" />
+    <Compile Include="SecondHerro.cs" />
+    <Compile Include="TestBatl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Student.cs" />
+    <Compile Include="AbilityEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

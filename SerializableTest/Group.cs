@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SerializableTest
 {
-    [Serializable] //для разрешения сериализации
-    class Group
+    [Serializable, DataContract] //для разрешения сериализации
+   public class Group
     {
         //{   [NonSerialized]
         //    private Random random = new Random(DateTime.Now.Millisecond);
         //[NonSerialized]
         //private int privatint = 5;
+        [DataMember]
         public int Number { get; set; }
+        [DataMember]
         public string Name { get; set; }
         
 

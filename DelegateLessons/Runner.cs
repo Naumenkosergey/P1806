@@ -30,12 +30,18 @@ namespace DelegateLessons
             //student.Moving = Show;
             //student.Move(10, method);
 
-            //student.Moving += new EventHandler<MovingEventArgs>(student_Moving);
-            student.Moving += student_Moving;
+            student.Moving += Student_Moving;
+            //student.Moving += student_Moving;
             student.Move(10);
 
         }
-                                 //издатель(Student)
+
+        private static void Student_Moving(object sender, MovingEventArgs e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        //издатель(Student)
         private static void student_Moving(string message)
         {
             Console.WriteLine(message);

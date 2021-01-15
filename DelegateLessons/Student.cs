@@ -9,7 +9,7 @@ namespace DelegateLessons
 {
     public delegate void ShowMessage(string message);
     //Генерирует событие ИЗДАТЕЛЬ
-    class Student 
+    class Student
     {
         //public void Move(int distance, ShowMessage method)
         //public void Move(int distance, Action<string> method)
@@ -18,16 +18,18 @@ namespace DelegateLessons
             for (int i = 0; i < distance; i++)
             {
                 Thread.Sleep(1000);
+
                 //method(String.Format($"Идет перемещение.... Пройдено километров: {i}"));
-                if (Moving !=null)
+                //if (Moving != null)
                     //Moving(String.Format($"Идет перемещение.... Пройдено километров: {i}"));
-                    //Moving(this, new MovingEventArgs(string.Format($"Идет перемещение.... Пройдено километров: {i}")));
-                    Moving(string.Format($"Идет перемещение.... Пройдено километров: {i}"));
+                    Moving?.Invoke(this, new MovingEventArgs(string.Format($"Идет перемещение.... Пройдено километров: {i}")));
+                //Moving(string.Format($"Идет перемещение.... Пройдено километров: {i}"));
             }
         }
         //public Action<string> Moving { get; set; }
-        //public event EventHandler<MovingEventArgs> Moving;
-        public event Action<string> Moving;
+
+        public event EventHandler<MovingEventArgs> Moving;
+        //public event Action<string> Moving;
         public int GetAge()
         {
             return 17;

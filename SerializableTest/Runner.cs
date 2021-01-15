@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization.Formatters.Soap;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace SerializableTest
 {
@@ -18,79 +20,58 @@ namespace SerializableTest
         {
             CreateGrups();
             CreateStudents();
+            PrintGroups();
             PrintStudents();
-            //PrintGroups();
 
-            ///////////////BEGIN BINARY/////////////////////
-            var binFormater = new BinaryFormatter();           
-            BinarySerializable(binFormater, "students.bin", students);
-            Console.WriteLine("----------------------------------------");
-            BinaryDesirializable(binFormater, "students.bin");
-            ///////////////END BINARY/////////////////////
+            Console.WriteLine("------------------bin----------------------");
+            BinWork();
             Console.ReadKey();
 
-            //Simple Object Acses Protocol не работает со списком (LIST)
-            ///////////////BEGIN SOAP//////////////////////
-            var soap = new SoapFormatter();
-            SoapSerializable(soap, "group.soap", groups);
             Console.WriteLine("-----------------soap-----------------------");
-            SoapDesirializable(soap, "group.soap");
-            ///////////////END SOAP/////////////////////
+            SoapWork();
+            Console.ReadKey();
+
+            Console.WriteLine("-----------------XML-----------------------");
+            XmlWork();
+            Console.ReadKey();
+
+            Console.WriteLine("-----------------JSON-----------------------");
+            JsonWork();
 
         }
 
-        private static void BinaryDesirializable(BinaryFormatter binFormater, string nameFile)
+        private static void JsonWork()
         {
-            using (var file = new FileStream(nameFile, FileMode.OpenOrCreate))
-            {
-                var deSirializeFile = binFormater.Deserialize(file) as Student[];
-                if (deSirializeFile != null)
-                {
-                    foreach (var item in deSirializeFile)
-                    {
-                        Console.WriteLine(item);
-                    }
-                }
-            }
+            var jsonFormatter = new DataContractJsonSerializer(typeof(Student[]));
+            SerializableJSON.JsonSerializable(jsonFormatter, "students.json", students);
+            SerializableJSON.JsonDesirializable(jsonFormatter, "students.json");
         }
 
-        private static void BinarySerializable(BinaryFormatter binFormater, string nameFile, object[] colections)
+        private static void BinWork()
         {
-            using (var file = new FileStream(nameFile, FileMode.OpenOrCreate))
-            {
-                binFormater.Serialize(file, colections);
-            }
+            var binFormater = new BinaryFormatter();
+            SerializableBin.BinarySerializable(binFormater, "groups.bin", groups);
+            SerializableBin.BinaryDesirializable(binFormater, "groups.bin");
         }
 
-        private static void SoapDesirializable(SoapFormatter soap, string nameFile)
+        private static void XmlWork()
         {
-            using (var file = new FileStream(nameFile, FileMode.OpenOrCreate))
-            {
-                var deSirializeFile = soap.Deserialize(file) as Group[];
-                if (deSirializeFile != null)
-                {
-                    foreach (var item in deSirializeFile)
-                    {
-                        Console.WriteLine(item);
-                    }
-                }
-            }
+            var xmlFormatter = new XmlSerializer(typeof(Group[]));
+            SerializableXML.XmlSerializable(xmlFormatter, "groups.xml", groups);
+            SerializableXML.XmlDesirializable(xmlFormatter, "groups.xml");
         }
 
-        private static void SoapSerializable(SoapFormatter soap, string nameFile, object[] colections)
+        private static void SoapWork()
         {
-            using (var file = new FileStream(nameFile, FileMode.OpenOrCreate))
-            {
-                soap.Serialize(file, colections);
-            }
+            var soap = new SoapFormatter();
+            SerializableSoap.SoapSerializable(soap, "group.soap", groups);
+            SerializableSoap.SoapDesirializable(soap, "group.soap");
         }
-
 
         private static void CreateStudents()
         {
             for (int i = 0; i < students.Length; i++)
             {
-
                 Student student = new Student(Guid.NewGuid().ToString().Substring(0, 7), random.Next(10, 20));
                 students[i] = student;
                 students[i].Group = groups[random.Next(groups.Length)];

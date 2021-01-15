@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace SeriliazableLesson
 {
     [Serializable]
-    class Student
+    public class Student
     {
-
+        [NonSerialized]
         int age;
         public string Name { get; set; }
 
@@ -34,6 +34,8 @@ namespace SeriliazableLesson
             Name = name;
             Age = age;
         }
+
+        public Student(){}
 
         public override string ToString()
         {

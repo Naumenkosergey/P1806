@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.IO;
 using System.Linq;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization.Formatters.Soap;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace SerialiazableLesson
 {
@@ -21,45 +23,92 @@ namespace SerialiazableLesson
         {
             GreateGroups();
             CreateStudents();
-            PrintStudents();
+            // PrintStudents();
 
-            var binarySerialiazable = new BinaryFormatter();
-            using (var file = new FileStream("students.bin", FileMode.OpenOrCreate))
+            //var binarySerialiazable = new BinaryFormatter();
+            //using (var file = new FileStream("students.bin", FileMode.OpenOrCreate))
+            //{
+            //    binarySerialiazable.Serialize(file, students);
+            //}
+
+            //Console.WriteLine("----------------------------------------------");
+            //using (var file = new FileStream("students.bin", FileMode.OpenOrCreate))
+            //{
+            //    var desirializableBinary = binarySerialiazable.Deserialize(file) as Student[];
+            //    if (desirializableBinary != null)
+            //    {
+            //        foreach (var item in desirializableBinary)
+            //        {
+            //            Console.WriteLine(item);
+            //        }
+            //    }
+            //}
+
+            //var soap = new SoapFormatter();
+            // using (var file = new FileStream("GROUPS.soap", FileMode.OpenOrCreate))
+            // {
+            //     soap.Serialize(file, groups);
+            // }
+
+            // Console.WriteLine("----------------------------------------------");
+            // using (var file = new FileStream("GROUPS.soap", FileMode.OpenOrCreate))
+            // {
+            //     var desirializableBinary = soap.Deserialize(file) as Group[];
+            //     if (desirializableBinary != null)
+            //     {
+            //         foreach (var item in desirializableBinary)
+            //         {
+            //             Console.WriteLine(item);
+            //         }
+            //     }
+            // }
+
+            //XmlSerializer xmlformatter = new XmlSerializer(typeof(Student[]));
+            //var file = new FileStream("students.xml", FileMode.OpenOrCreate);
+
+            //xmlformatter.Serialize(file, students);
+            //Console.WriteLine("XML created");
+            //file.Close();
+
+
+
+            //Console.WriteLine("----------------------------------");
+
+            //file = new FileStream("students.xml", FileMode.OpenOrCreate);
+
+            //var desXmlFormat = xmlformatter.Deserialize(file) as Student[];
+            //if (desXmlFormat != null)
+            //{
+            //    Console.WriteLine(desXmlFormat[15]);
+            //}
+
+
+            DataContractJsonSerializer jsonformatter = new DataContractJsonSerializer(typeof(Group[]));
+            using (var file = new FileStream("grougs.json", FileMode.OpenOrCreate))
             {
-                binarySerialiazable.Serialize(file, students);
+                jsonformatter.WriteObject(file, groups);
+                Console.WriteLine("json created");
+
             }
 
-            Console.WriteLine("----------------------------------------------");
-            using (var file = new FileStream("students.bin", FileMode.OpenOrCreate))
+            Console.WriteLine("----------------------------------");
+
+            using (var file = new FileStream("grougs.json", FileMode.OpenOrCreate))
             {
-                var desirializableBinary = binarySerialiazable.Deserialize(file) as Student[];
-                if (desirializableBinary != null)
+                var desjson = jsonformatter.ReadObject(file) as Group[];
+                if (desjson != null)
                 {
-                    foreach (var item in desirializableBinary)
-                    {
-                        Console.WriteLine(item);
-                    }
+                    Console.WriteLine(desjson[2]);
                 }
             }
 
-            var soap = new SoapFormatter();
-            using (var file = new FileStream("GROUPS.soap", FileMode.OpenOrCreate))
-            {
-                soap.Serialize(file, groups);
-            }
 
-            Console.WriteLine("----------------------------------------------");
-            using (var file = new FileStream("GROUPS.soap", FileMode.OpenOrCreate))
-            {
-                var desirializableBinary = soap.Deserialize(file) as Group[];
-                if (desirializableBinary != null)
-                {
-                    foreach (var item in desirializableBinary)
-                    {
-                        Console.WriteLine(item);
-                    }
-                }
-            }
+
+
+
+
+
+
         }
 
         private static void PrintStudents()
